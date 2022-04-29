@@ -1,0 +1,166 @@
+From db56733e4ed2125944b89e01cf36a9e451dd36f5 Mon Sep 17 00:00:00 2001
+From: Peter Dimov <pdimov@pdimov.com>
+Date: Wed, 27 May 2015 01:29:50 +0300
+Subject: [PATCH] Move placeholders to namespace boost::placeholders.
+
+---
+ include/boost/bind.hpp              |  4 +-
+ include/boost/bind/arg.hpp          |  6 +--
+ include/boost/bind/placeholders.hpp | 65 +++++++++++++----------------
+ test/protect_test.cpp               |  2 +-
+ 4 files changed, 36 insertions(+), 41 deletions(-)
+
+diff --git a/include/boost/bind.hpp b/include/boost/bind.hpp
+index fd3421e..336f17c 100644
+--- a/include/boost/bind.hpp
++++ b/include/boost/bind.hpp
+@@ -10,7 +10,7 @@
+ //
+ //  bind.hpp - binds function objects to arguments
+ //
+-//  Copyright (c) 2009 Peter Dimov
++//  Copyright (c) 2009, 2015 Peter Dimov
+ //
+ //  Distributed under the Boost Software License, Version 1.0.
+ //  See accompanying file LICENSE_1_0.txt or copy at
+@@ -21,4 +21,6 @@
+ 
+ #include <boost/bind/bind.hpp>
+ 
++using namespace boost::placeholders;
++
+ #endif // #ifndef BOOST_BIND_HPP_INCLUDED
+diff --git a/include/boost/bind/arg.hpp b/include/boost/bind/arg.hpp
+index c879bb4..a74b829 100644
+--- a/include/boost/bind/arg.hpp
++++ b/include/boost/bind/arg.hpp
+@@ -28,17 +28,17 @@ namespace boost
+ 
+ template< int I > struct arg
+ {
+-    arg()
++    BOOST_CONSTEXPR arg()
+     {
+     }
+ 
+-    template< class T > arg( T const & /* t */ )
++    template< class T > BOOST_CONSTEXPR arg( T const & /* t */ )
+     {
+         BOOST_STATIC_ASSERT( I == is_placeholder<T>::value );
+     }
+ };
+ 
+-template< int I > bool operator==( arg<I> const &, arg<I> const & )
++template< int I > BOOST_CONSTEXPR bool operator==( arg<I> const &, arg<I> const & )
+ {
+     return true;
+ }
+diff --git a/include/boost/bind/placeholders.hpp b/include/boost/bind/placeholders.hpp
+index 3b098b1..cf8c375 100644
+--- a/include/boost/bind/placeholders.hpp
++++ b/include/boost/bind/placeholders.hpp
+@@ -11,10 +11,11 @@
+ //  bind/placeholders.hpp - _N definitions
+ //
+ //  Copyright (c) 2002 Peter Dimov and Multi Media Ltd.
++//  Copyright 2015 Peter Dimov
+ //
+-// Distributed under the Boost Software License, Version 1.0. (See
+-// accompanying file LICENSE_1_0.txt or copy at
+-// http://www.boost.org/LICENSE_1_0.txt)
++//  Distributed under the Boost Software License, Version 1.0.
++//  See accompanying file LICENSE_1_0.txt or copy at
++//  http://www.boost.org/LICENSE_1_0.txt
+ //
+ //  See http://www.boost.org/libs/bind/bind.html for documentation.
+ //
+@@ -22,48 +23,40 @@
+ #include <boost/bind/arg.hpp>
+ #include <boost/config.hpp>
+ 
+-namespace
++namespace boost
+ {
+ 
+-#if defined(__BORLANDC__) || defined(__GNUC__) && (__GNUC__ < 4)
+-
+-static inline boost::arg<1> _1() { return boost::arg<1>(); }
+-static inline boost::arg<2> _2() { return boost::arg<2>(); }
+-static inline boost::arg<3> _3() { return boost::arg<3>(); }
+-static inline boost::arg<4> _4() { return boost::arg<4>(); }
+-static inline boost::arg<5> _5() { return boost::arg<5>(); }
+-static inline boost::arg<6> _6() { return boost::arg<6>(); }
+-static inline boost::arg<7> _7() { return boost::arg<7>(); }
+-static inline boost::arg<8> _8() { return boost::arg<8>(); }
+-static inline boost::arg<9> _9() { return boost::arg<9>(); }
++namespace placeholders
++{
+ 
+-#elif defined(BOOST_MSVC) || (defined(__DECCXX_VER) && __DECCXX_VER <= 60590031) || defined(__MWERKS__) || \
+-    defined(__GNUC__) && (__GNUC__ == 4 && __GNUC_MINOR__ < 2)  
++#if defined(BOOST_NO_CXX11_CONSTEXPR)
+ 
+-static boost::arg<1> _1;
+-static boost::arg<2> _2;
+-static boost::arg<3> _3;
+-static boost::arg<4> _4;
+-static boost::arg<5> _5;
+-static boost::arg<6> _6;
+-static boost::arg<7> _7;
+-static boost::arg<8> _8;
+-static boost::arg<9> _9;
++inline boost::arg<1> _1() { return boost::arg<1>(); }
++inline boost::arg<2> _2() { return boost::arg<2>(); }
++inline boost::arg<3> _3() { return boost::arg<3>(); }
++inline boost::arg<4> _4() { return boost::arg<4>(); }
++inline boost::arg<5> _5() { return boost::arg<5>(); }
++inline boost::arg<6> _6() { return boost::arg<6>(); }
++inline boost::arg<7> _7() { return boost::arg<7>(); }
++inline boost::arg<8> _8() { return boost::arg<8>(); }
++inline boost::arg<9> _9() { return boost::arg<9>(); }
+ 
+ #else
+ 
+-boost::arg<1> _1;
+-boost::arg<2> _2;
+-boost::arg<3> _3;
+-boost::arg<4> _4;
+-boost::arg<5> _5;
+-boost::arg<6> _6;
+-boost::arg<7> _7;
+-boost::arg<8> _8;
+-boost::arg<9> _9;
++static constexpr boost::arg<1> _1;
++static constexpr boost::arg<2> _2;
++static constexpr boost::arg<3> _3;
++static constexpr boost::arg<4> _4;
++static constexpr boost::arg<5> _5;
++static constexpr boost::arg<6> _6;
++static constexpr boost::arg<7> _7;
++static constexpr boost::arg<8> _8;
++static constexpr boost::arg<9> _9;
+ 
+ #endif
+ 
+-} // unnamed namespace
++} // namespace placeholders
++
++} // namespace boost
+ 
+ #endif // #ifndef BOOST_BIND_PLACEHOLDERS_HPP_INCLUDED
+diff --git a/test/protect_test.cpp b/test/protect_test.cpp
+index 7ca46ea..0da7d51 100644
+--- a/test/protect_test.cpp
++++ b/test/protect_test.cpp
+@@ -8,7 +8,7 @@
+ // http://www.boost.org/LICENSE_1_0.txt)
+ 
+ #include <boost/bind/protect.hpp>
+-#include <boost/bind/bind.hpp>
++#include <boost/bind.hpp>
+ 
+ #include <boost/detail/lightweight_test.hpp>
+ 
+-- 
+2.36.0
+
