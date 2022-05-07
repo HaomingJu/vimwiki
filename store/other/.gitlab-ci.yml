@@ -49,7 +49,7 @@ upload_on_1804:
     script:
         - curl -X POST -F file=@`ls build/*.deb` http://10.11.100.8:8083/api/files/rttr_bionic
         - curl -X POST http://10.11.100.8:8083/api/repos/infra_bionic/file/rttr_bionic
-        - curl -X PUT http://10.11.100.8:8083/api/publish/trunk/bionic
+        - curl -X PUT -H 'Content-Type: application/json' --data '{"ForceOverwrite":true}' http://10.11.100.8:8083/api/publish/trunk/bionic
 
 upload_on_1604:
     image: ubuntu:amd64_16.04
@@ -64,4 +64,4 @@ upload_on_1604:
     script:
         - curl -X POST -F file=@`ls build/*.deb` http://10.11.100.8:8083/api/files/rttr_xenial
         - curl -X POST http://10.11.100.8:8083/api/repos/infra_xenial/file/rttr_xenial
-        - curl -X PUT http://10.11.100.8:8083/api/publish/trunk/xenial
+        - curl -X PUT -H 'Content-Type: application/json' --data '{"ForceOverwrite":true}' http://10.11.100.8:8083/api/publish/trunk/xenial
