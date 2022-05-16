@@ -1,0 +1,43 @@
+# https://gitlab.kitware.com/cmake/community/-/wikis/doc/cpack/Configuration
+# https://gitlab.kitware.com/cmake/community/-/wikis/doc/cpack/PackageGenerators
+
+find_program(LSB_RELEASE_EXEC lsb_release)
+execute_process(COMMAND ${LSB_RELEASE_EXEC} -c -s
+    OUTPUT_VARIABLE LSB_RELEASE_ID_SHORT
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+# 打包相关
+set(CPACK_GENERATOR DEB)
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
+
+set(CPACK_PACKAGE_FILE_NAME lib${PROJECT_NAME}_${PROJECT_VERSION}_amd64_${LSB_RELEASE_ID_SHORT})
+set(CPACK_INCLUDE_TOPLEVEL_DIRECTORY OFF)
+set(CPACK_PACKAGE_INSTALL_DIRECTORY ${CMAKE_INSTALL_PREFIX})
+set(CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+
+# 描述
+#set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_SOURCE_DIR}/README.txt)
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "This is test cpack project")
+
+# 供应商信息
+set(CPACK_PACKAGE_VENDOR trunk)
+set(CPACK_PACKAGE_CONTACT trunk@trunk.tech)
+
+# 版本相关
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+
+# 平台相关
+set(CPACK_SYSTEM_NAME ${CMAKE_SYSTEM_NAME})
+#set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
+set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE amd64)
+
+# 依赖
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "ying (>= 1.0.4), protobuf-compiler (>= 3.0.0), libyaml-cpp-dev (>= 0.5.2)")
+
+# 额外
+#set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_SOURCE_DIR}/cmake/package/preinst")
+
+
+include(CPack)
