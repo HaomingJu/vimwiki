@@ -7,7 +7,7 @@ gitlab runner的运行方式一般采用Docker-in-Docker的方式, 即在注册(
 对于其中的常用参数进行记录
 
 ```
-concurrent = 1                          # 并发数, 每个runner可以同时执行的任务数
+concurrent = 4                          # 并发数, 每个runner可以同时执行的任务数
 check_interval = 0
 
 [session_server]
@@ -18,6 +18,8 @@ check_interval = 0
   url = "http://192.168.3.148/"
   token = "JhC2x4L4YqCZD4czida9"
   executor = "docker"
+  output_limit = 32768                  # 日志输出大小限制, 单位: 字节
+  limit = 1                             # 当前runner同一时刻最多执行多少个任务
   [runners.custom_build_dir]
   [runners.cache]
     [runners.cache.s3]
