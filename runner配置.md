@@ -30,6 +30,7 @@ check_interval = 0
     image = "ubuntu:18.04_base"
     cpus = "8"                          # 限制runner可以使用的CPU最大个数
     memory = "16g"                      # 限制内存使用
+    runtime = "nvidia"                  # 可以在docker内调用显卡
     privileged = false
     disable_entrypoint_overwrite = false
     oom_kill_disable = false
@@ -38,4 +39,20 @@ check_interval = 0
     extra_hosts = ["git-rd.trunk.tech:192.168.3.148"]       # 追加DNS解析
     pull_policy = ["if-not-present"]                        # 镜像拉取策略: 优先本地发现, 否则从远程拉取
     shm_size = 0
+```
+
+Docker with GPU 参考: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html
+
+```
+sudo cat /etc/docker/daemon.json
+
+{
+    "insecure-registries": ["192.168.3.248:8081"],
+    "runtimes": {
+        "nvidia": {
+            "path": "/usr/bin/nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    }
+}
 ```
