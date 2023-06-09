@@ -1,17 +1,16 @@
 [#](#) 1. GitLab
 
 **CI/CD**
---- [runner注册](./runner注册.md)
+[docker的配置](./ci_cd/docker配置.md)
+[runner注册与注销](./ci_cd/runner注册.md)
+[runner配置](./ci_cd/runner配置.md)
+[runner创建Docker镜像](./ci_cd/gitlab-runner-build-docker-image.md)
+[CI文件编写](./ci_cd/CI文件编写.md)
+[cache和artifacts的区别](./ci_cd/cache和artifacts的区别.md)
+[CI内置变量(ci variables)](./ci_cd/CI内置变量.md)
+[nginx反向代理](nginx反向代理)
 
---- [runner配置](./runner配置.md)
 
---- [runner创建Docker镜像](./gitlab-runner-build-docker-image.md)
-
---- [CI文件编写](./CI文件编写.md)
-
---- [cache和artifacts的区别](./cache和artifacts的区别.md)
-
---- [CI内置变量(ci variables)](./CI内置变量.md)
 
 
 # 2. C++

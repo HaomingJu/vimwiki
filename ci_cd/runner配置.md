@@ -20,6 +20,7 @@ check_interval = 0
   executor = "docker"
   output_limit = 32768                  # 日志输出大小限制, 单位: 字节
   limit = 1                             # 当前runner同一时刻最多执行多少个任务
+  pre_build_script="chmod 1777 /tmp"    # 每次构建前执行的脚本, 某些不便于在.gitlab.yml中写的, 可以再此处统一写
   [runners.custom_build_dir]
   [runners.cache]
     [runners.cache.s3]

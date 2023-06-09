@@ -9,7 +9,11 @@
 sudo apt install -y docker*
 
 # 拉取runner镜像
-sudo docker pull gitlab/gitlab-runner:latest
+docker run -d --name CIRunner \
+    ¦   --restart always \
+    ¦   -v /srv/gitlab-runner/config:/etc/gitlab-runner \
+    ¦   -v /var/run/docker.sock:/var/run/docker.sock \
+    ¦   gitlab/gitlab-runner:latest
 
 # 创建gitlab-runner实例
 docker run -d --name CIRunner \
@@ -34,3 +38,14 @@ sudo docker exec -it runner /bin/bash -c 'gitlab-runner health-check'
 # 配置文件, 参考 [runner_config](runner_config.md)
 sudo vim /srv/gitlab-runner/config/config.toml 
 ```
+
+3. 注销runner
+
+```
+docker exec -it CIRunner /bin/bash -c 'gitlab-runner unregister --url <gitlab_url> --token <runner_token>'
+
+# docker exec -it CIRunner /bin/bash -c 'gitlab-runner unregister --url http://192.168.3.148 --token CV_JWc5EYrwZkhSdJy-Y'
+```
+
+
+4. 关闭服务
