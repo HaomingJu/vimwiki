@@ -1,48 +1,45 @@
-[#](#) 1. GitLab
+[#](#) Gitlab
+## CICD
+    [Runner注册](./Gitlab/CICD/Runner注册.md)
+    [Runner配置](./Gitlab/CICD/Runner配置.md)
+    [Cache和Artifact的区别](./Gitlab/CICD/cache和artifacts的区别.md)
+    [gitlab-ci.yml文件编写](./Gitlab/CICD/gitlab-ci.yml文件编写)
+    [Runer的DiD模式](./Gitlab/CICD/gitlab-runner-build-docker-image.md) -- 在Docker中构建Docker镜像
+    [内置变量](./Gitlab/CICD/内置变量.md)
 
-**CI/CD**
-[docker的配置](./ci_cd/docker配置.md)
-[runner注册与注销](./ci_cd/runner注册.md)
-[runner配置](./ci_cd/runner配置.md)
-[runner创建Docker镜像](./ci_cd/gitlab-runner-build-docker-image.md)
-[CI文件编写](./ci_cd/CI文件编写.md)
-[cache和artifacts的区别](./ci_cd/cache和artifacts的区别.md)
-[CI内置变量(ci variables)](./ci_cd/CI内置变量.md)
-[nginx反向代理](nginx反向代理)
+# Language
+## C++
+    [SFINAE: substitute failure is not a error](./Language/C++/SFINAE.md)
+    [完美转发](./Language/C++/完美转发.md)
+    
+    [Boost PFR](./Language/C++/Boost/PFR.md)
+    [Boost在Ubuntu16以及Ubuntu18上版本兼容问题](./Language/C++/Boost版本兼容问题.md)
+    [TODO Boost-Context:协程]
+    [Boost-Lockfree:无锁队列](./Language/C++/Boost/Lockfree.md)
+    [enable_if](./Language/C++/enable_if探究.md)
+    [多线程思考](./Language/C++/多线程思考.md)
+    
+## Python
+    [协程async&await](./Language/Python/Python进阶-协程.md)
 
+# Ubuntu
+## MiddleWare(中间件)
+    [ROS2研习](./Ubuntu/MiddleWare/ROS2.md)
+    
+    
+## Nginx
+    [TODO 文件部署]
+    [TODO 文件部署鉴权]
+    [TODO 集群代理方案]
+    [nginx反向代理](./Ubuntu/Nginx/反向代理.md)
+## Compile
+    [交叉编译名词对照表](./Ubuntu/Compile/交叉编译名词对照表.md)
+    [ToolChian文件编写](./Ubuntu/Compile/ToolChain文件编写.md)
+## Remote
+    [远程服务器带宽测试](./Ubuntu/Remote/远程服务器带宽测试.md)
+    [OpenVPN搭建](./Ubuntu/Remote/OpenVPN搭建.md)
 
-**WSL2**
-[WSL2安装升级](./WSL2/WSL2安装升级.md) // TODO
-[WSL2网络配置](./WSL2/WSL2网络配置.md)
-
-
-
-# 2. C++
-
-**Basic Type(基础类型)**
-[整型研究](./integer_research.md)
-
-**Boost**
-[版本不一致问题](./版本不一致问题.md)
-
-**STL**
-[内存屏障](./内存屏障.md)
-[C++多线程](./C++多线程.md)
-
-
-**交叉编译**
-[名称对照表](./CrossCompile/对照表.md)
-[cmake交叉编译工具链介绍](./CrossCompile/CMakeCrossCompileToolChain.md)
-[交叉编译依赖解决方案](./CrossCompile/CrossDeps.md)
-
-
-# 3. 前端
-
-**REST APIs**
-
-**GraphQL**
-
-
-# 4. CodeSnippet
-
-[cmake](./snippet/cmake/cmake_snippet.md)
+# Windows
+## WSL2
+    [TODO WSL2开发环境配置-安装]
+    [TODO WSL2开发环境配置-端口转发]

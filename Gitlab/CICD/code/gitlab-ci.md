@@ -1,3 +1,6 @@
+> file: .gitlab-ci.yml
+
+```yaml
 stages:
     - compile
     - upload
@@ -65,3 +68,4 @@ upload_on_1604:
         - curl -X POST -F file=@`ls build/*.deb` http://10.11.100.8:8083/api/files/rttr_xenial
         - curl -X POST http://10.11.100.8:8083/api/repos/infra_xenial/file/rttr_xenial
         - curl -X PUT -H 'Content-Type: application/json' --data '{"ForceOverwrite":true}' http://10.11.100.8:8083/api/publish/trunk/xenial
+```

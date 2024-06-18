@@ -1,4 +1,3 @@
-
 gitlab runner注册配置完成之后还涉及到两个方面, **镜像编写** 和 **.gitlab-ci.yml文件**
 
 镜像请参考: `https://github.com/HaomingJu/DockerServer`
