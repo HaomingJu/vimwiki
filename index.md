@@ -25,9 +25,13 @@
 # Ubuntu
 ## MiddleWare(中间件)
     [ROS2研习](./Ubuntu/MiddleWare/ROS2.md)
+
+## CLI
+    [Bashly研习](./Ubuntu/CLI/Bashly研习.md)
+    [Rsync使用](./Ubuntu/CLI/Rsync使用.md)
     
     
-## Nginx
+Nginx
     [TODO 文件部署]
     [TODO 文件部署鉴权]
     [TODO 集群代理方案]
@@ -35,11 +39,12 @@
 ## Compile
     [交叉编译名词对照表](./Ubuntu/Compile/交叉编译名词对照表.md)
     [ToolChian文件编写](./Ubuntu/Compile/ToolChain文件编写.md)
+    [distcc分布式编译实践](./Ubuntu/Compile/distcc分布式编译实践.md)
 ## Remote
     [远程服务器带宽测试](./Ubuntu/Remote/远程服务器带宽测试.md)
     [OpenVPN搭建](./Ubuntu/Remote/OpenVPN搭建.md)
 
 # Windows
 ## WSL2
-    [TODO WSL2开发环境配置-安装]
-    [TODO WSL2开发环境配置-端口转发]
+    [TODO [WSL2开发环境配置 安装](WSL2开发环境配置-安装)]
+    [TODO [WSL2开发环境配置 端口转发](WSL2开发环境配置-端口转发)]
